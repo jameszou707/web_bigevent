@@ -1,0 +1,63 @@
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  /* background-color: #0094ff; */
+  background: url(../images/login_bg.jpg) no-repeat;
+  background-size: cover;
+}
+
+/* 登录注册框 */
+
+.loginAndRegBox {
+  width: 400px;
+  height: 300px;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 登录注册框的 标题 */
+
+.title-box {
+  height: 60px;
+  background: url('/assets/images/login_title.png') no-repeat center;
+}
+
+/* 默认隐藏 注册框 */
+
+.reg-box {
+  display: none;
+}
+
+.layui-form {
+  padding: 0 30px;
+}
+
+.links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.links a {
+  font-size: 12px;
+}
+
+/* 登录框里的 小图标 位置---------- */
+
+.layui-form-item {
+  position: relative;
+}
+
+.layui-form-item .layui-icon {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.layui-input {
+  padding-left: 30px;
+}
