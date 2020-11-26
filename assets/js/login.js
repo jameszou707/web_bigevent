@@ -53,7 +53,10 @@ $(function () {
           // b.跳转到 index.html 
           location.href = '/index.html'
         });
-      }
+      },
+      // complete(){
+
+      // }
     });
   });
 })
