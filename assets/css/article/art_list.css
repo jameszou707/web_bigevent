@@ -1,0 +1,20 @@
+html, body {
+  background-color: #f2f3f5;
+  margin: 5px;
+  padding: 0px;
+}
+
+/* 设置 页面头部区域 文字 和 按钮 两边显示 */
+
+.layui-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 新增面板 */
+
+#formAdd {
+  padding-top: 20px;
+  padding-right: 30px;
+}
