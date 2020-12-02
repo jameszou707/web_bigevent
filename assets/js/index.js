@@ -49,7 +49,8 @@ function logout() {
     // b.删除 localStorage 中的 token 值
     localStorage.removeItem('token');
     // c.跳转到 login.html
-    location.href = "/login.html";
+    // location.href = "/login.html";
+    location.replace('/login.html');
 
     layer.close(index);
   });

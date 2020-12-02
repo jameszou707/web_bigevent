@@ -1,7 +1,7 @@
 function initEditor() {
   tinymce.init({
     //选择class为content的标签作为编辑器
-    selector: 'textarea',
+    selector: '#content',
     //方向从左到右
     directionality: 'ltr',
     //语言选择中文

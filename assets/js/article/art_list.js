@@ -19,6 +19,10 @@ $(function () {
   initCate();
 
   //未 未来的删除按钮 代理 点击事件
+  $('tbody').on('click', '.btn-edit', function () {
+    location.href = "/article/art_edit.html?id=" + this.dataset.id;
+  });
+  //未 未来的删除按钮 代理 点击事件
   $('tbody').on('click', '.btn-delete', del);
 })
 

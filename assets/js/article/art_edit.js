@@ -34,9 +34,40 @@ $(function () {
   $('#btnDraft').on('click', draft);
 
   //6.为表单 绑定 提交事件
-  $('#form-pub').on('submit', doSubmit);
+  $('#form-edit').on('submit', doSubmit);
 })
 
+// 获取 url 中的 get参数值
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) { return pair[1]; }
+  }
+  return (false);
+}
+
+//0.根据id加载 待编辑文章的 信息 到 表单中
+function loadArt() {
+  // a.id从 url中获取
+  let editId = getQueryVariable('id');
+
+  // b.异步请求 文章数据
+  $.ajax({
+    url: '/my/article/' + editId,
+    method: 'GET',
+    success(res) {
+      console.log(res);
+      // c.将 获取的 文章分类 数据 自动装填到 表单元素中
+      layui.form.val('formData', res.data);
+      // d.手动设置 富文本编辑器 内容
+      tinymce.editors['content'].setContent(res.data.content);
+      // e.手动设置 剪裁区 图片 地址
+      $image.cropper('replace', 'http://ajax.frontend.itheima.net' + res.data.cover_img)
+    }
+  });
+}
 
 //1.请求分类下来框数据并 渲染 下拉框 -------------------------
 function initCateList() {
@@ -52,6 +83,10 @@ function initCateList() {
       $('select[name=cate_id]').html(strHtml);
       // d.重新渲染 layui下拉框
       layui.form.render();
+
+
+      //2.加载 文章数据
+      loadArt();
     }
   });
 }
@@ -90,7 +125,10 @@ function doSubmit(e) {
   //a.阻断表单默认行为
   e.preventDefault();
   //b.获取 表单数据 装入 FormData对象（有文件要上传）
-  let fd = new FormData(this); // new FormData(document.querySelector('#form-pub'))
+  let fd = new FormData(this); // new FormData(document.querySelector('#form-edit'))
+  // a.id从 url中获取
+  let editId = getQueryVariable('id');
+  fd.append('Id', editId);
   //c.为 FormData 追加 state 值（已发布/草稿）
   fd.append('state', state);
   //d.为 FormData 追加 剪裁后的文件数据
@@ -105,7 +143,7 @@ function doSubmit(e) {
 
       // d.提交 到 接口
       $.ajax({
-        url: '/my/article/add',
+        url: '/my/article/edit',
         method: 'post',
         data: fd,
         processData: false,
